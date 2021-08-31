@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 #Route:group(['prefix'=>'v1','as'=>'api.','namespace'=>'Api\V1\Admin','middleware'=>['auth:sanctum']], function())--Revisar na documentação
 
 
+//User
+Route::get('/users',[UserController::class,'index']);
+Route::get('/users/{user}',[UserController::class,'show']);
+Route::post('/users/{user}/todos',[UserController::class,'storeTodo']);
 
+
+
+
+//Auth
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 
