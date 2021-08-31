@@ -20,8 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 #Route:group(['prefix'=>'v1','as'=>'api.','namespace'=>'Api\V1\Admin','middleware'=>['auth:sanctum']], function())--Revisar na documentação
 
-Route::post('register',[AuthController::class,'register']);
 
+
+Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 
 
