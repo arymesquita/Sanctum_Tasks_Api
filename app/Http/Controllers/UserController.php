@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function storeTodo(User $user, TodoStoreRequest $request)
     {
-    	$input = $request->validation();
+    	$input = $request->validated();
 
     	$todo = $user->todos()->create($input);
 

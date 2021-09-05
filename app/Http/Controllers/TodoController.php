@@ -4,61 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use App\Http\Resources\TodoResource;
+use App\Http\Requests\UpdateStoreRequest;
 
 class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function markAsDone(Todo $todo)
     {
-       
+       $todo->is_done = true;
+       $todo->save();
+
+       return new TodoResource($todo);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   
+    public function markAsUndone(Todo $todo)
     {
-        //
+        $todo->is_done = false;
+        $todo ->save();
+
+        return new TodoResource($todo);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+   
+    public function update(Todo $todo, UpdateStoreRequest $request)
     {
-        //
+        $input = $request->validated();
+        $todo->fill($input);
+        $todo->save();
+
+        return new TodoResource($todo);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+   
+    public function destroy(Todo $todo)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $todo->delete();
     }
 }

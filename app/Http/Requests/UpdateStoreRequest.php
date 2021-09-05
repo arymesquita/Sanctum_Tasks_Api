@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TodoStoreRequest extends FormRequest
+class UpdateStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class TodoStoreRequest extends FormRequest
      */
     public function rules()
     {
-         return [
+        return [
             'title'       => 'required|string',
             'description' => 'required|string',
             'due_date'    => 'required|string',
